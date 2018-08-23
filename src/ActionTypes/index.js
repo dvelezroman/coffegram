@@ -1,0 +1,1 @@
+export const INCREMENTA_USER = "INCREMENTA_USER";
