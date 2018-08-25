@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
+import authentication from '../../../Store/Services/firebase';
 
 const fieldName = (props) => {
-	console.log(props);
 	return(
 		<View>
 			<TextInput style={styles.textInput}
@@ -48,15 +48,25 @@ const validate = (values) => {
 }
 
 const SignInForm = (props) => {
-	console.log(props);
 	return(
 		<View>
 			<Field name="name" component={fieldName} placeholder="nombre"/>
 			<Field name="email" component={fieldName} placeholder="e-mail"/>
 			<Field name="password" component={fieldName} placeholder="password"/>
 			<Button 
-				title="Sign In" 
-				onPress={props.handleSubmit(values => {console.log(values)})}
+				title="Loggin" 
+				onPress={props.handleSubmit(values => {
+					authentication.signInWithEmailAndPassword(values.email, values.password)
+					.then(success => {
+						console.log(success)
+					})
+					.catch(function(error) {
+						// Handle Errors here.
+						var errorCode = error.code;
+						var errorMessage = error.message;
+						// ...
+					});
+				})}
 			/>
 		</View>
 	);
@@ -66,6 +76,7 @@ const styles = StyleSheet.create({
 	textInput: {
 		marginBottom: 5,
 		height: 16,
+		color: '#fff',
 	},
 	line: {
 		height: 2,

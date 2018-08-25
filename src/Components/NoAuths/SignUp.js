@@ -13,7 +13,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const SignUp = (props) => {
-	console.log(props.numero);
 	const { navigation } = props;
 	return (
 		<View style={styles.container}>
