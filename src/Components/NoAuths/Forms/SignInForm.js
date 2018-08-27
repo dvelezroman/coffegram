@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import authentication from '../../../Store/Services/firebase';
@@ -55,18 +55,7 @@ const SignInForm = (props) => {
 			<Field name="password" component={fieldName} placeholder="password"/>
 			<Button 
 				title="Loggin" 
-				onPress={props.handleSubmit(values => {
-					authentication.signInWithEmailAndPassword(values.email, values.password)
-					.then(success => {
-						console.log(success)
-					})
-					.catch(function(error) {
-						// Handle Errors here.
-						var errorCode = error.code;
-						var errorMessage = error.message;
-						// ...
-					});
-				})}
+				onPress={props.handleSubmit(props.userSignInHandler)}
 			/>
 		</View>
 	);

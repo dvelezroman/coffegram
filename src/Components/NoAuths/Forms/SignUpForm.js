@@ -3,7 +3,6 @@ import {
   View, Text, StyleSheet, TextInput, Button,
 } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
-import authentication from '../../../Store/Services/firebase';
 
 const fieldName = (props) => {
   return (
@@ -66,14 +65,8 @@ const SignUpForm = (props) => {
       <Field name="conf_password" component={fieldName} placeholder="confirm password" />
       <Button
         title="Registrar"
-        onPress={props.handleSubmit((values) => { 
-          authentication.createUserWithEmailAndPassword(values.email, values.password)
-          .then(success => console.log(success))
-          .catch(error => {
-            let errorCode = error.code;
-            let errorMessage = error.message;
-          }); 
-        })}
+        onPress={props.handleSubmit(props.userRegisterHandler
+      )}
       />
     </View>
   );
