@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { incrementaUser } from '../../ActionCreators/index';
 import SignUpForm from './Forms/SignUpForm';
+import { newUserRegister } from '../../ActionCreators/index';
 
 const mapStateToProps = state => ({
 	numero: state.userReducer,
 });
 
 const mapDispatchToProps = dispatch => ({
-	incrementaUser: user => dispatch(incrementaUser(user)),
-})
+	userRegister: values => dispatch(newUserRegister(values)),
+});
 
-const SignUp = (props) => {
-	const { navigation } = props;
-	return (
-		<View style={styles.container}>
-			<Text style={{ color: '#EEEEECFF'}}>SignUp</Text>
-			<SignUpForm />
-			<Button
-				title="Sign In" 
-				onPress={() => {navigation.goBack()}}
-			/>
-		</View>
-	);
+class SignUp extends Component {
+	userRegisterHandler = (values) => {
+		this.props.userRegister(values);
+	}
+
+	render() {
+		const { navigation } = this.props;
+		return (
+			<View style={styles.container}>
+				<Text style={{ color: '#EEEEECFF'}}>Sign Up</Text>
+				<SignUpForm userRegisterHandler={this.userRegisterHandler} />
+				<Button
+					title="Sign In" 
+					onPress={() => {navigation.goBack()}}
+				/>
+			</View>
+		);
+	}
 }
 
 const styles = StyleSheet.create({

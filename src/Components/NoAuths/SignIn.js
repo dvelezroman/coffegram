@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import SignInForm from './Forms/SignInForm';
+import { userSignIn } from '../../ActionCreators/index';
 
 const mapStateToProps = state => ({
-	numero: state.userReducer,
+	
 });
 
 const mapDispatchToProps = dispatch => ({
-	incrementaUser: user => dispatch(incrementaUser(user)),
+	userSignIn: values => dispatch(userSignIn(values)),
 })
 
-const SignIn = (props) => {
-	const { navigation } = props;
-	return (
-		<View style={styles.container}>
-			<Text style={{ color: '#EEEEECFF'}}>SignIn</Text>
-			<SignInForm />
-			<Button
-				title="Sign Up" 
-				onPress={() => {navigation.navigate('SignUp')}}
-			/>
-		</View>
-	);
-};
+class SignIn extends Component {
+	userSignInHandler = (values) => {
+		this.props.userSignIn(values);
+	}
+
+	render = () => {
+		const { navigation } = this.props;
+		return (
+			<View style={styles.container}>
+				<Text style={{ color: '#EEEEECFF'}}>SignIn</Text>
+				<SignInForm userSignInHandler={this.userSignInHandler} />
+				<Button
+					title="Sign Up" 
+					onPress={() => {navigation.navigate('SignUp')}}
+				/>
+			</View>
+		);
+	};
+}
 
 const styles = StyleSheet.create({
 	container: {
@@ -33,4 +41,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
