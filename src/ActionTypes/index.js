@@ -1,5 +1,9 @@
-export const INCREMENTA_USER = "INCREMENTA_USER";
+export const LOGGED_USER = "LOGGED_USER";
 
 export const NEW_USER_REGISTER = "NEW_USER_REGISTER";
 
 export const SIGNIN_USER = "SIGNIN_USER";
+
+export const START_SESSION = "START_SESSION";
+
+export const CLOSE_SESSION = "CLOSE_SESSION";
