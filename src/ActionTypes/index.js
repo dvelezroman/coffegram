@@ -1,1 +1,5 @@
 export const INCREMENTA_USER = "INCREMENTA_USER";
+
+export const NEW_USER_REGISTER = "NEW_USER_REGISTER";
+
+export const SIGNIN_USER = "SIGNIN_USER";

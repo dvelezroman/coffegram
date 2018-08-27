@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import RootReducer from '../Reducers/index';
+import watcher from '../Sagas/index';
+import createSagaMiddleware from 'redux-saga';
 
+const sagaMiddleware = createSagaMiddleware();
 
-const miMiddleware = store => next => (action) => {
-  console.log('Se ejecuta el middleware');
-  next(action);
-}
+const store = createStore(RootReducer, applyMiddleware(sagaMiddleware));
 
-const store = createStore(RootReducer, applyMiddleware(miMiddleware));
+sagaMiddleware.run(watcher);
 
 export default store;
