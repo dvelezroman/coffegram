@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import { authentication } from '../Store/Services/firebase';
+import { AuthsRoutes } from '../Components/Auths/AuthsRoutes';
 import { NoAuthsRoutes } from './NoAuths/NoAuthsRoutes';
 import { startSession, closeSession, loggedUser } from '../ActionCreators/index';
 
 const mapStateToProps = state => ({
-  state: state,
+  user: state.userReducer,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -28,10 +29,9 @@ class VerifyIfSession extends Component {
   }
 
   render() {
-    console.log(this.props.state);
     return (
       <View style={styles.container}>
-        <NoAuthsRoutes />
+        {this.props.user ? <AuthsRoutes /> : <NoAuthsRoutes />}
       </View>
     );
   }
