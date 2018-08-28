@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { incrementaUser } from '../../ActionCreators/index';
 import SignUpForm from './Forms/SignUpForm';
+import SelectImage from '../SelectImage';
 import { newUserRegister } from '../../ActionCreators/index';
 
 const mapStateToProps = state => ({
@@ -22,12 +23,14 @@ class SignUp extends Component {
 		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
-				<Text style={{ color: '#EEEEECFF'}}>Sign Up</Text>
+				<SelectImage />
 				<SignUpForm userRegisterHandler={this.userRegisterHandler} />
-				<Button
-					title="Sign In" 
-					onPress={() => {navigation.goBack()}}
-				/>
+				<View style={{flex: 2, paddingHorizontal: 16}}>
+					<Button
+						title="Sign In" 
+						onPress={() => {navigation.goBack()}}
+					/>
+				</View>
 			</View>
 		);
 	}
@@ -37,9 +40,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#2E3436FF',
-		justifyContent: 'center',
-		paddingHorizontal: 16,  
-	}
+	},
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
