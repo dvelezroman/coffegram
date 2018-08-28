@@ -13,7 +13,6 @@ console.warn = message => {
 
 // Initialize Firebase
 var config = {
-  apiKey: "",
   authDomain: "caffeinagram.firebaseapp.com",
   databaseURL: "https://caffeinagram.firebaseio.com",
   projectId: "caffeinagram",
