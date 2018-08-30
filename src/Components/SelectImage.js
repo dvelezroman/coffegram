@@ -7,8 +7,8 @@ class SelectImage extends Component {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
+      base64: true,
     });
-    //console.log(result);
     if (!result.cancelled) {
       this.props.loadSignUpImage(result);
       //this.setState({ image: result.uri });

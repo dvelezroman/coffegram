@@ -4,8 +4,7 @@ import { Text, View, Button, StyleSheet } from 'react-native';
 import { blur, change } from 'redux-form';
 import SignUpForm from './Forms/SignUpForm';
 import SelectImage from '../SelectImage';
-import { newUserRegister } from '../../ActionCreators/index';
-import { loadSignUpImage, clearSignUpImage } from '../../ActionCreators/index';
+import { newUserRegister, loadSignUpImage, clearSignUpImage } from '../../ActionCreators/index';
 
 const mapStateToProps = state => ({
 	numero: state.userReducer,

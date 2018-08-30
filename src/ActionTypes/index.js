@@ -18,6 +18,6 @@ export const LOAD_IMAGE = 'LOAD_IMAGE';
 
 export const CLEAR_IMAGE = 'CLEAR_IMAGE';
 
-export const URL_UPLOAD_IMAGE = `https://api.cloudinary.com/v1_1/${cloudinary.cloudName}/image/upload`;
+export const URL_UPLOAD_IMAGE = 'https://api.cloudinary.com/v1_1/dw3gqqnr8/image/upload';
 
 export const PRESET_UPLOAD_IMAGE = cloudinary.preset;
