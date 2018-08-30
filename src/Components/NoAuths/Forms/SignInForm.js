@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
-import authentication from '../../../Store/Services/firebase';
 
 const fieldName = (props) => {
 	return(
@@ -23,6 +22,7 @@ const fieldName = (props) => {
 
 const validate = (values) => {
 	const errors = {};
+
 	if (!values.name) {
 		errors.name = 'required';
 	} else if (values.name.length < 5) {
@@ -50,7 +50,7 @@ const validate = (values) => {
 const SignInForm = (props) => {
 	return(
 		<View>
-			<Field name="name" component={fieldName} placeholder="nombre"/>
+			<Field name="name" component={fieldName} placeholder="user"/>
 			<Field name="email" component={fieldName} placeholder="e-mail"/>
 			<Field name="password" component={fieldName} placeholder="password"/>
 			<Button 
