@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, Button, StyleSheet } from 'react-native';
-import { incrementaUser } from '../../ActionCreators/index';
+import { blur, change } from 'redux-form';
 import SignUpForm from './Forms/SignUpForm';
 import SelectImage from '../SelectImage';
 import { newUserRegister } from '../../ActionCreators/index';
+import { loadSignUpImage, clearSignUpImage } from '../../ActionCreators/index';
 
 const mapStateToProps = state => ({
 	numero: state.userReducer,
+  image: state.imageSignUpReducer.image,
 });
 
 const mapDispatchToProps = dispatch => ({
 	userRegister: values => dispatch(newUserRegister(values)),
+	loadSignUpImage: (values) => {
+		dispatch(loadSignUpImage(values));
+		dispatch(blur('SignUpForm', 'image', Date.now()));
+	},
+  clearSignUpImage: () => dispatch(clearSignUpImage()),
 });
 
 class SignUp extends Component {
@@ -19,12 +26,16 @@ class SignUp extends Component {
 		this.props.userRegister(values);
 	}
 
+	componentWillUnmount() {
+    this.props.clearSignUpImage();
+  }
+
 	render() {
 		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
-				<SelectImage />
-				<SignUpForm userRegisterHandler={this.userRegisterHandler} />
+				<SelectImage image={this.props.image} loadSignUpImage={this.props.loadSignUpImage} />
+				<SignUpForm userRegisterHandler={this.userRegisterHandler} image={this.props.image} />
 				<View style={{flex: 2, paddingHorizontal: 16}}>
 					<Button
 						title="Sign In" 

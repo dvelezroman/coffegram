@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Button, Image, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { ImagePicker } from 'expo';
-import { loadSignUpImage, clearSignUpImage } from '../ActionCreators/index';
-
-const mapStateToProps = state => ({
-  image: state.imageSignUpReducer.image,
-});
-
-const mapDispatchToProps = dispatch => ({
-  loadSignUpImage: values => dispatch(loadSignUpImage(values)),
-  clearSignUpImage: () => dispatch(clearSignUpImage()),
-})
 
 class SelectImage extends Component {
   pickImage = async () => {
@@ -19,16 +8,12 @@ class SelectImage extends Component {
       allowsEditing: true,
       aspect: [4, 3],
     });
-    console.log(result);
+    //console.log(result);
     if (!result.cancelled) {
-      this.props.loadSignUpImage(result)
+      this.props.loadSignUpImage(result);
       //this.setState({ image: result.uri });
     }
   };
-
-  componentWillUnmount() {
-    this.props.clearSignUpImage();
-  }
 
   render() {
     let { image } = this.props;
@@ -57,4 +42,4 @@ const styles = StyleSheet.create ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectImage);
+export default SelectImage;
