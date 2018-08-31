@@ -1,11 +1,13 @@
-import { INCREMENTA_USER } from '../ActionTypes/index';
+import { LOGGED_USER, UNLOGGED_USER } from '../ActionTypes/index';
 
-const initialState = 0;
+const initialState = null;
 
 const user = (state = initialState, action) => {
 	switch (action.type) {
-		case INCREMENTA_USER:
-			return state + action.payload;
+		case LOGGED_USER:
+			return action.payload.uid;
+		case UNLOGGED_USER:
+			return null;
 		default:
 			return state;
 	}

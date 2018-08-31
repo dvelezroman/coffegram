@@ -4,6 +4,16 @@ import {
 } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 
+const fieldImage = (props) => {
+	return(
+	<View style={{alignItems: 'center'}}>
+		<View>
+  		{ props.meta.touched && props.meta.error && <Text style={styles.error}>{props.meta.error}</Text>}
+		</View>
+	</View>
+	)
+}
+
 const fieldName = (props) => {
   return (
     <View>
@@ -23,8 +33,13 @@ const fieldName = (props) => {
   );
 };
 
-const validate = (values) => {
+const validate = (values, props) => {
   const errors = {};
+
+  if (!props.image) {
+		errors.image = 'required';
+  }
+  
   if (!values.name) {
     errors.name = 'required';
   } else if (values.name.length < 5) {
@@ -58,28 +73,32 @@ const validate = (values) => {
 
 const SignUpForm = (props) => {
   return (
-    <View>
+    <View style={styles.container}>
+      <Field name="image" component={fieldImage} />
       <Field name="name" component={fieldName} placeholder="nombre" />
       <Field name="email" component={fieldName} placeholder="e-mail" />
       <Field name="password" component={fieldName} placeholder="password" />
       <Field name="conf_password" component={fieldName} placeholder="confirm password" />
       <Button
         title="Registrar"
-        onPress={props.handleSubmit(props.userRegisterHandler
-      )}
+        onPress={props.handleSubmit(props.userRegisterHandler)}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 3,
+    paddingHorizontal: 16,
+  },
   textInput: {
-    marginBottom: 5,
+    marginBottom: 4,
     height: 16,
     color: '#fff'
   },
   line: {
-    height: 2,
+    height: 1,
     backgroundColor: '#DCDCDC',
   },
   error: {
