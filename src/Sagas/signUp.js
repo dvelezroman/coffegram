@@ -3,7 +3,6 @@ import axios from 'axios';
 import uuid from 'uuid';
 import { authentication, firebaseDataBase } from '../Store/Services/firebase';
 import { firebaseStorage } from '../Store/Services/firebase';
-import { URL_UPLOAD_IMAGE, PRESET_UPLOAD_IMAGE } from '../ActionTypes/index'; // URL_UPLOAD_IMAGE contains the url where to upload, PRESET_UPLOAD_IMAGE contains a key to upload a picture without authentication
 
 const registerInFirebase = data => 
   authentication.createUserWithEmailAndPassword(data.email, data.password)
@@ -19,7 +18,7 @@ const storeImage = async ({ image }) => {
 
   const response = await fetch(uri);
   const blob = await response.blob();
-  const ref = firebaseStorage.ref(`/coffegram/${name}`);
+  const ref = firebaseStorage.ref(`/coffegram/users/${name}`);
   const snapshot = await ref.put(blob);
   return ref.getDownloadURL().then(url => url);
 };

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from 'react-navigation';
 import { StackHome } from './StackHome';
 import { StackSearch } from './StackSearch';
-import Add from './Add';
+import { StackAdd } from './StackAdd';
 import { StackFollow } from './StackFollow';
 import Profile from './Profile';
 
@@ -13,14 +13,14 @@ const AuthsRoutes = createBottomTabNavigator ({
 		screen: StackSearch,
 	},
 	Add: {
-		screen: Add,
+		screen: StackAdd,
 	},
 	Follow: {
 		screen: StackFollow,
 	},
 	Profile: {
 		screen: Profile,
-	},
+	},	
 })
 
 export { AuthsRoutes };
