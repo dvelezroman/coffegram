@@ -20,7 +20,7 @@ class SelectGallery extends Component {
   }
 
   imagePublishHandler = values => {
-    this.props.publishImage(values);
+    this.props.publishImage(Object.assign({}, values, {createdAt: Date().split('(')[0]}));
   }
 
   componentWillUnmount() {
@@ -29,7 +29,7 @@ class SelectGallery extends Component {
 
   render() {
     //console.log('Resolucion: ', width,' X ', height)
-    const { imageToUpload, loadImageFromGallery } = this.props;
+    const { imageToUpload, comments, createdAt, loadImageFromGallery } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.blank}/>

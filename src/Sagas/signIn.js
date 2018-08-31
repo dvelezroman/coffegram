@@ -1,5 +1,5 @@
 import { call } from 'redux-saga/effects';
-import { authentication, firebaseDataBase } from '../Store/Services/firebase';
+import { authentication  } from '../Store/Services/firebase';
 
 const signInFirebase = data => authentication.signInWithEmailAndPassword(data.email, data.password)
 .then(success => success);
@@ -7,8 +7,7 @@ const signInFirebase = data => authentication.signInWithEmailAndPassword(data.em
 export default function* workerSignIn(values) {
   console.log(values);
   try {
-    const responseUserSignIn = yield call (signInFirebase, values.payload);
-    console.log(responseUserSignIn);
+    yield call (signInFirebase, values.payload);
   } catch(error) {
     console.log(error);
   }

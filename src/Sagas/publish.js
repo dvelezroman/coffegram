@@ -1,12 +1,17 @@
 import { call, select } from 'redux-saga/effects';
 import uuid from 'uuid';
-import { authentication, firebaseDataBase } from '../Store/Services/firebase';
-import { firebaseStorage } from '../Store/Services/firebase';
+import { firebaseDataBase, firebaseStorage } from '../Store/Services/firebase';
 
+const registerInDataBase = ({
+ uid, userKey, pictureUrl, comments = '', createdAt }) => firebaseDataBase.ref(`publications/`)
+    .push({ userKey, pictureUrl, comments, createdAt})
+    .then(response => response);
 
-const registerInDataBase = ({ uid, userKey, pictureUrl, comments, createdAt }) => firebaseDataBase.ref(`publications/${uid}`).set({ userKey, pictureUrl, comments, createdAt })
+const registerAuthorPublications = ({ userKey, key }) => firebaseDataBase.ref(`authorPublications/${userKey}`)
+    .update({ [key]: true })
+    .then(response => response);
 
-const storeImage = async ({ image }) => { 
+const storeImage = async ({ image }) => { // stores a picture in the firebaseStorage
   const { uri, type } = image;
   const splitName = uri.split('/');
   const name = [...splitName].pop();
@@ -21,15 +26,16 @@ const storeImage = async ({ image }) => {
 
 function* workerPublish(values) { // generator function called by the watcher when the app needs to publish and storage a Picture
   try {
-    const { comments } = values.payload
+    console.log('Values con createdAt: ', values);
+    const { comments, createdAt } = values.payload;
     const image = yield select(state => state.imageGalleryReducer); // gets the object of image with picture data
     const userKey = yield select(state => state.userReducer); // gets the loggedUser
-    const pictureUrl = yield call(storeImage, image); // gets the url picture in the storage 
-    const createdAt = Date().split('(')[0];
+    const pictureUrl = yield call(storeImage, image); // gets the url picture in the storage
     const uid = uuid();
-    yield call(registerInDataBase, { uid, userKey, pictureUrl, comments, createdAt }); // stores the data of new user in firebase database
-  } catch(error) {
-      console.log(error);
+    const { key } = yield call(registerInDataBase, { uid, userKey, pictureUrl, comments, createdAt }); // stores the data of new user in firebase database
+    yield call(registerAuthorPublications, { userKey, key })
+  } catch (error) {
+    console.log(error);
   }
 }
 

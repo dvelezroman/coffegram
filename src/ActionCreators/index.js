@@ -10,6 +10,7 @@ import {
   LOAD_IMAGE_TO_UPLOAD,
   UNLOAD_IMAGE_TO_UPLOAD,
   PUBLISH_IMAGE,
+  GET_PUBLICATIONS,
 } from '../ActionTypes/index';
 
 // stores the data user
@@ -34,3 +35,5 @@ export const loadImageFromGallery = values => ({ type: LOAD_IMAGE_TO_UPLOAD, pay
 export const unloadImageFromGallery = () => ({ type: UNLOAD_IMAGE_TO_UPLOAD });
 // publish and storage an image selected
 export const publishImage = values => ({ type: PUBLISH_IMAGE, payload: values });
+// get all the publications from a user
+export const getPublications = () => ({ type: GET_PUBLICATIONS });

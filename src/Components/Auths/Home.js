@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { getPublications } from '../../ActionCreators/index';
 
 class Home extends Component {
+  componentDidMount() {
+    this.props.getPublications();
+  }
+
   render() {
     const { navigation } = this.props;
     return (
@@ -28,5 +34,12 @@ const styles = StyleSheet.create({
 	}
 });
 
+const mapStateToProps = state => ({
+  pictures: state.publicationsReducer,
+});
 
-export default Home;
+const mapDispatchToProps = dispatch => ({
+  getPublications: () => dispatch(getPublications()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
