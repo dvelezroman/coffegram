@@ -10,18 +10,19 @@ class SelectImage extends Component {
       base64: true,
     });
     if (!result.cancelled) {
-      this.props.loadSignUpImage(result);
+      if (this.props.loadSignUpImage) this.props.loadSignUpImage(result);
+      if (this.props.loadImageFromGallery) this.props.loadImageFromGallery(result);
       //this.setState({ image: result.uri });
     }
   };
 
   render() {
-    let { image } = this.props;
+    let { image, gallery } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.pickImage}>
-          <Image source={ image ? { uri: image.uri } : require('../../assets/blank-profile-picture.png') } 
-            style={styles.image} 
+          <Image source={ image ? { uri: image.uri } : require('../../assets/unloadedPictureFromGallery.jpg') } 
+            style={gallery ? styles.imageToUpload : styles.imageToSignUp} 
           />
         </TouchableOpacity>
       </View>
@@ -35,11 +36,18 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  image: {
+  imageToSignUp: {
     width: 160,
     height: 160,
     borderRadius: 80,
-  }
+  },
+  imageToUpload: {
+    flex: 1,
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
+    borderRadius: 10,
+  },
 })
 
 export default SelectImage;

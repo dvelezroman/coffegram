@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, Button, StyleSheet } from 'react-native';
-import { blur, change } from 'redux-form';
+import { View, Button, StyleSheet } from 'react-native';
+import { blur } from 'redux-form';
 import SignUpForm from './Forms/SignUpForm';
 import SelectImage from '../SelectImage';
 import { newUserRegister, loadSignUpImage, clearSignUpImage } from '../../ActionCreators/index';
 
 const mapStateToProps = state => ({
-	numero: state.userReducer,
+  numero: state.userReducer,
   image: state.imageSignUpReducer.image,
 });
 
@@ -32,7 +32,7 @@ class SignUp extends Component {
 	render() {
 		const { navigation } = this.props;
 		return (
-			<View style={styles.container}>
+  		<View style={styles.container}>
 				<SelectImage image={this.props.image} loadSignUpImage={this.props.loadSignUpImage} />
 				<SignUpForm userRegisterHandler={this.userRegisterHandler} image={this.props.image} />
 				<View style={{flex: 2, paddingHorizontal: 16}}>

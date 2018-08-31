@@ -81,8 +81,7 @@ const SignUpForm = (props) => {
       <Field name="conf_password" component={fieldName} placeholder="confirm password" />
       <Button
         title="Registrar"
-        onPress={props.handleSubmit(props.userRegisterHandler
-      )}
+        onPress={props.handleSubmit(props.userRegisterHandler)}
       />
     </View>
   );

@@ -15,3 +15,9 @@ export const UNLOGGED_USER = 'UNLOGGED_USER';
 export const LOAD_IMAGE = 'LOAD_IMAGE';
 
 export const CLEAR_IMAGE = 'CLEAR_IMAGE';
+
+export const LOAD_IMAGE_TO_UPLOAD = 'LOAD_IMAGE_TO_UPLOAD';
+
+export const UNLOAD_IMAGE_TO_UPLOAD = 'UNLOAD_IMAGE_TO_UPLOAD';
+
+export const PUBLISH_IMAGE = 'PUBLISH_IMAGE';

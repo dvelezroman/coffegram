@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 class Add extends Component {
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
-      	<Text>Add</Text>
+        <Button 
+          title='Gallery'
+          onPress={() => { navigation.navigate('SelectImage') }}
+        />
+        <Button
+          title='Take a Picture'
+          onPress={() => { navigation.navigate('SelectImage') }}
+        />
       </View>
     );
   }
