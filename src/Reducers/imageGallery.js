@@ -1,4 +1,5 @@
 import { LOAD_IMAGE_TO_UPLOAD, UNLOAD_IMAGE_TO_UPLOAD } from '../ActionTypes/index';
+
 const initialState = {
   image: null,
   comments: null,

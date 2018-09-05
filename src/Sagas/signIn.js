@@ -5,7 +5,6 @@ const signInFirebase = data => authentication.signInWithEmailAndPassword(data.em
 .then(success => success);
 
 export default function* workerSignIn(values) {
-  console.log(values);
   try {
     yield call (signInFirebase, values.payload);
   } catch(error) {

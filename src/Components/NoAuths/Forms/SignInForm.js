@@ -23,14 +23,6 @@ const fieldName = (props) => {
 const validate = (values) => {
 	const errors = {};
 
-	if (!values.name) {
-		errors.name = 'required';
-	} else if (values.name.length < 5) {
-		errors.name = 'name is too short';
-	} else if (values.name.length > 10) {
-		errors.name = 'name too long';
-	}
-
 	if (!values.email) {
 		errors.email = 'required';
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -50,7 +42,6 @@ const validate = (values) => {
 const SignInForm = (props) => {
 	return(
 		<View>
-			<Field name="name" component={fieldName} placeholder="user"/>
 			<Field name="email" component={fieldName} placeholder="e-mail"/>
 			<Field name="password" component={fieldName} placeholder="password"/>
 			<Button 

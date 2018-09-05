@@ -1,20 +1,43 @@
 import React, { Component } from 'react';
 import { Image, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Permissions, Camera } from 'expo';
 import { ImagePicker } from 'expo';
 
 class SelectImage extends Component {
   pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      base64: true,
-    });
+    let result;
+    if (this.props.camera) {
+      result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+        base64: true,
+      });
+    } else {
+      result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+        base64: true,
+      });
+    }
     if (!result.cancelled) {
       if (this.props.loadSignUpImage) this.props.loadSignUpImage(result);
       if (this.props.loadImageFromGallery) this.props.loadImageFromGallery(result);
       //this.setState({ image: result.uri });
     }
   };
+
+  componentWillMount() {
+    Permissions.askAsync(Permissions.CAMERA_ROLL).then((response) => {
+      this.setState({
+        has_camera_roll_permission: response.status === 'granted'
+      });
+    });
+    Permissions.askAsync(Permissions.CAMERA).then((response) => {
+      this.setState({
+        has_camera_permission: response.status === 'granted'
+      });
+    });
+  }
 
   render() {
     let { image, gallery } = this.props;

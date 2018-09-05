@@ -11,6 +11,11 @@ import {
   UNLOAD_IMAGE_TO_UPLOAD,
   PUBLISH_IMAGE,
   GET_PUBLICATIONS,
+  LOAD_PUBLICATIONS_TO_STORE,
+  LOAD_AUTHORS_TO_STORE,
+  SUCCESS_PUBLISH,
+  UNSUCCESS_PUBLISH,
+  RESET_PUBLISH_STATE
 } from '../ActionTypes/index';
 
 // stores the data user
@@ -37,3 +42,13 @@ export const unloadImageFromGallery = () => ({ type: UNLOAD_IMAGE_TO_UPLOAD });
 export const publishImage = values => ({ type: PUBLISH_IMAGE, payload: values });
 // get all the publications from a user
 export const getPublications = () => ({ type: GET_PUBLICATIONS });
+// load publications on redux store
+export const loadPublicationsToStore = values => ({ type: LOAD_PUBLICATIONS_TO_STORE, payload: values });
+// load authors on redux store
+export const loadAuthorsToStorage = values => ({ type: LOAD_AUTHORS_TO_STORE, payload: values });
+// success when a publish is completed
+export const successPublish = () => ({ type: SUCCESS_PUBLISH });
+// error when a publish is not completed or error
+export const unsuccessPublish = () => ({ type: UNSUCCESS_PUBLISH });
+// reset the publish state flag
+export const resetPublishState = () => ({ type: RESET_PUBLISH_STATE });

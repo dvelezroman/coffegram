@@ -8,11 +8,11 @@ class Add extends Component {
       <View style={styles.container}>
         <Button 
           title='Gallery'
-          onPress={() => { navigation.navigate('SelectImage') }}
+          onPress={() => { navigation.navigate({ routeName: 'SelectImage', params: { camera: false } }) }}
         />
         <Button
           title='Take a Picture'
-          onPress={() => { navigation.navigate('SelectImage') }}
+          onPress={() => { navigation.navigate({ routeName: 'SelectImage', params: { camera: true } }) }}
         />
       </View>
     );

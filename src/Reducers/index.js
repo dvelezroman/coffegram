@@ -5,6 +5,8 @@ import sessionReducer from './session';
 import imageSignUpReducer from './imageSignUp';
 import imageGalleryReducer from './imageGallery';
 import publicationsReducer from './publicationsReducer';
+import authorsReducer from './authorsReducer';
+import publishStateReducer from './publishStateReducer';
 
 const reducers = combineReducers({
 	sessionReducer,
@@ -12,6 +14,8 @@ const reducers = combineReducers({
 	imageSignUpReducer,
 	imageGalleryReducer,
 	publicationsReducer,
+	authorsReducer,
+	publishStateReducer,
 	form
 });
 
